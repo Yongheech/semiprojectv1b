@@ -3,28 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>세미프로젝트</title>
+    <link rel="stylesheet" href="/static/css/bs5/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/project.css">
     <style>
-        table {border: 1px solid black; margin: 120px auto;
-                border-collapse: collapse}
-        th, td{border: 1px solid black; padding: 5px 8px}
     </style>
 </head>
 <body>
-    <div id="wrap">
-        <header><h1>세미프로젝트 v1</h1></header>
-        <nav><ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/member/join">회원가입</a></li>
-            <li><a href="/member/login">로그인</a></li>
-            <li><a href="/board/list">게시판</a></li>
-            <li><a href="/member/myinfo">회원정보</a></li>
+    <div id="wrap" class="container">
+        <header class="py-3"><h1>세미프로젝트 v1</h1></header>
+        <nav><ul class="nav nav-fill">
+            <li class="nav-item"><a class="nav-link " href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link " href="/member/join">회원가입</a></li>
+            <li class="nav-item"><a class="nav-link " href="/member/login">로그인</a></li>
+            <li class="nav-item"><a class="nav-link " href="/board/list">게시판</a></li>
+            <li class="nav-item"><a class="nav-link " href="/member/myinfo">회원정보</a></li>
         </ul>
             <hr>
         </nav>
         <main>
             <h2>회원정보</h2>
-            <table>
+            <div class="d-flex justify-content-center align-items-center" style="height: 65vh">
+            <table class="table w-25 table-bordered table-striped">
                 <tr>
                     <th>아이디</th>
                     <td>sjestageek</td>
@@ -43,10 +42,11 @@
                 </tr>
 
             </table>
+            </div>
         </main>
         <footer>
             <hr>
-            <p>copyright &copy; 2024.alpaca.all rights reserved. </p>
+            <p class="text-center">copyright &copy; 2024.alpaca.all rights reserved. </p>
         </footer>
     </div>
 </body>
