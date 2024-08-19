@@ -7,6 +7,7 @@ from starlette.templating import Jinja2Templates
 from app.routes.member import member_router
 
 app = FastAPI()
+
 templates = Jinja2Templates(directory="views/templates") # jinja2 설정
 app.mount('/static', StaticFiles(directory='views/static'), name='static')
 
