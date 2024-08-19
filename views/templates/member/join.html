@@ -3,52 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>세미프로젝트</title>
+    <link rel="stylesheet" href="/static/css/bs5/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/project.css">
     <style>
-        form { width: 350px; margin: 100px auto;  }
-        form label { display: inline-block; width: 120px; text-align: right;
-                    font-weight: bold}
-        form div {margin: 5px 0}
-        form input {padding: 5px;}
-        button{ margin-left: 7px ; padding: 5px}
+
     </style>
 
 </head>
 <body>
-    <div id="wrap">
-        <header><h1>세미프로젝트 v1</h1></header>
-        <nav><ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/member/join">회원가입</a></li>
-            <li><a href="/member/login">로그인</a></li>
-            <li><a href="/board/list">게시판</a></li>
-            <li><a href="/member/myinfo">회원정보</a></li>
+    <div id="wrap" class="container">
+        <header class="py-3"><h1>세미프로젝트 v1</h1></header>
+        <nav><ul class="nav nav-fill">
+            <li class="nav-item"><a class="nav-link " href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link " href="/member/join">회원가입</a></li>
+            <li class="nav-item"><a class="nav-link " href="/member/login">로그인</a></li>
+            <li class="nav-item"><a class="nav-link " href="/board/list">게시판</a></li>
+            <li class="nav-item"><a class="nav-link " href="/member/myinfo">회원정보</a></li>
         </ul>
             <hr>
-        </nav>
+    </nav>
         <main>
             <h2>회원가입</h2>
-            <form name="joinfrm" method="post">
-                <div><label for="userid">아이디</label>
-                     <input type="text" name="userid" id="userid"
-                           minlength="6" maxlength="18" required> </div>
-                <div><label for="passwd">비밀번호</label>
+            <div class="d-flex justify-content-center align-items-center" style="height: 65vh">
+            <form name="joinfrm" method="post" class="col-5">
+                <div class="row my-2"><label for="userid" class="col-form-label col-4 text-end">아이디</label>
+                    <div class="col-7">
+                    <input type="text" name="userid" id="userid"
+                           minlength="6" maxlength="18" required class="form-control "></div></div>
+                <div  class="row my-2"><label for="passwd" class="col-form-label col-4 text-end">비밀번호</label>
+                    <div class="col-7">
                     <input type="text" name="passwd" id="passwd"
-                           minlength="6" maxlength="18" required> </div>
-                <div><label for="repasswd">비밀번호 확인</label>
+                           minlength="6" maxlength="18" required class="form-control"> </div></div>
+                <div  class="row my-2"><label for="repasswd" class="col-form-label col-4 text-end">비밀번호 확인</label>
+                    <div class="col-7">
                     <input type="text" name="repasswd" id="repasswd"
-                           minlength="6" maxlength="18" required> </div>
-                <div><label for="name">이름</label>
-                    <input type="text" name="name" id="name" required> </div>
-                <div><label for="email">이메일</label>
-                    <input type="email" name="email" id="email" required> </div>
-                   <div><label></label><button type="submit" id="joinbtn">입력완료</button>
-                    <button type="reset" id="rstbtn">다시입력</button> </div>
+                           minlength="6" maxlength="18" required class="form-control"></div></div>
+                <div  class="row my-2"><label for="name" class="col-form-label col-4 text-end">이름</label>
+                    <div class="col-7">
+                    <input type="text" name="name" id="name" required class="form-control"></div></div>
+                <div  class="row my-2"><label for="email" class="col-form-label col-4 text-end">이메일</label>
+                    <div class="col-7">
+                    <input type="email" name="email" id="email" required class="form-control"></div></div>
+                   <div  class="row my-2"><label class="col-4 text-end" ></label>
+                       <div class="col-7">
+                       <button type="submit" id="joinbtn" class="btn btn-primary">입력완료</button>
+                       <button type="reset" id="rstbtn" class="btn btn-danger">다시입력</button></div></div>
             </form>
+            </div>
         </main>
         <footer>
             <hr>
-            <p>copyright &copy; 2024.alpaca.all rights reserved. </p>
+            <p class="text-center">copyright &copy; 2024.alpaca.all rights reserved. </p>
         </footer>
     </div>
 </body>
