@@ -1,33 +1,12 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>세미프로젝트</title>
-    <link rel="stylesheet" href="/static/css/bs5/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/project.css">
-    <style>
-    </style>
-</head>
-<body>
-    <div id="wrap" class="container">
-        <header class="py-3"><h1>세미프로젝트 v1</h1></header>
-        <nav><ul class="nav nav-fill">
-            <li class="nav-item"><a class="nav-link " href="/">Home</a></li>
-            <li class="nav-item"><a class="nav-link " href="/member/join">회원가입</a></li>
-            <li class="nav-item"><a class="nav-link " href="/member/login">로그인</a></li>
-            <li class="nav-item"><a class="nav-link " href="/board/list">게시판</a></li>
-            <li class="nav-item"><a class="nav-link " href="/member/myinfo">회원정보</a></li>
-        </ul>
-        <hr>
-        </nav>
-        <main>
-            <div class="text-center">
-                <img src="/static/img/index.jpg/" class="img-fluid"></div>
-        </main>
-        <footer>
-        <hr>
-        <p class="text-center">copyright &copy; 2024.alpaca.all rights reserved. </p>
-        </footer>
-    </div>
-</body>
-</html>
+{% extends 'include/base.html'%}
+
+{% block title%}
+세미프로젝트
+{% endblock %}
+
+{% block main%}
+<main>
+    <div class="text-center">
+        <img src="/static/img/index.jpg/" class="img-fluid"></div>
+</main>
+{%endblock%}
