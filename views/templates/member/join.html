@@ -43,7 +43,46 @@
   let joinbtn = document.querySelector('#joinbtn')
   let joinfrm = document.joinfrm;
 
+  // 회원 가입 폼 체크 함수
+  let checkjoinfrm = (frm) => {
+      if (frm.userid.value === ''){
+          alert('아이디를 입력하세요');
+          frm.userid.focus();
+          return false;
+      }
+      else if (frm.passwd.value === ''){
+          alert('비밀번호를 입력하세요');
+          frm.passwd.focus();
+          return false;
+      }
+      else if (frm.repasswd.value === ''){
+          alert('비밀번호 확인을 입력하세요');
+          frm.repasswd.focus();
+          return false;
+      }
+      else if (frm.repasswd.value !== frm.passwd.value){
+          alert('비밀번호가 같은지 확인하세요');
+          frm.repasswd.focus();
+          return false;
+      }
+      else if (frm.name.value === ''){
+          alert('이름을 입력하세요');
+          frm.name.focus();
+          return false;
+      }
+      else if (frm.email.value === ''){
+          alert('이메일을 입력하세요');
+          frm.email.focus();
+          return false;
+      } else {
+          return true;
+      }
+  };
+
  joinbtn.addEventListener('click', ( ) => {
+     // 회원정보 입력 여부 검사
+     if (!checkjoinfrm(joinfrm)) return;
+
      // 폼에 입력된 회원 정보를 초기화함
      const formData = new FormData(joinfrm);
      console.log(formData);
@@ -71,5 +110,6 @@
          // 서버에서 응답해 준 url로 이동
      }); //fetch
    });//addEventListener
+
 </script>
 {% endblock %}
