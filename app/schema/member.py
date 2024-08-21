@@ -6,4 +6,4 @@ class NewMember(BaseModel):
     passwd: str
     name: str
     email: str
-
+    captcha: str
