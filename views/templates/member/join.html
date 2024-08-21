@@ -44,28 +44,32 @@
   let joinfrm = document.joinfrm;
 
  joinbtn.addEventListener('click', ( ) => {
-      // 폼에 입력된 회원 정보를 초기화함
+     // 폼에 입력된 회원 정보를 초기화함
      const formData = new FormData(joinfrm);
      console.log(formData);
 
      // 서버로 보내기 위해 폼데이터를 JSON객체로 변환
      let jsondata = {};
-     formData.forEach((val,key) => {
-        jsondata[key] = val;
+     formData.forEach((val, key) => {
+         jsondata[key] = val;
      });
 
-      console.log(jsondata);
+     console.log(jsondata);
 
-      // ajax를 이용해서 서버로 json 데이터 전송하고, 결과 받음
-      fetch('/member/join', {
-          method: 'POST', // 데이터 전송방식
-          headers: {      // 전송할 데이터 종류
-              'Accept':'application/json',
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(jsondata) // 전송할 데이터
-                                         // 문자열을 json으로 변환
-      })
-   });
+     // ajax를 이용해서 서버로 json 데이터 전송하고, 결과 받음
+     fetch('/member/join', {
+         method: 'POST', // 데이터 전송방식
+         headers: {      // 전송할 데이터 종류
+             'Accept': 'application/json',
+             'Content-Type': 'application/json'
+         },
+         body: JSON.stringify(jsondata), // 전송할 데이터
+         // 문자열을 json으로 변환
+         redirect: 'follow'           // 서버 응답시 처리방식 지정
+     }).then((res) => {
+         if (res.redirected) location.href = res.url;
+         // 서버에서 응답해 준 url로 이동
+     }); //fetch
+   });//addEventListener
 </script>
 {% endblock %}
