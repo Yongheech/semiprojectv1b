@@ -1,5 +1,5 @@
 import requests
-from sqlalchemy import insert
+from sqlalchemy import insert, select, and_
 from sqlalchemy.exc import SQLAlchemyError
 
 from app.model.member import Member
@@ -27,7 +27,7 @@ class MemberService:
     def check_captcha(member):
 
         req_url = 'https://www.google.com/recaptcha/api/siteverify'
-        params = { 'secret': '',
+        params = { 'secret': '6LeKoCsqAAAAAOGQbslqQCwHU6shGBsPfmajiVh5',
                    'response': member.captcha }
 
         res = requests.get(req_url, params=params)
@@ -36,3 +36,21 @@ class MemberService:
 
         return result['success']
         # return True
+
+    @staticmethod
+    def login_member(db, data):
+        try:
+            find_login = and_(Member.userid == data.get('userid'),
+                              Member.passwd == data.get('passwd'))
+            stmt = select(Member.userid).where(find_login)
+            result = db.execute(stmt).scalars().first()
+
+            return result
+        except SQLAlchemyError as ex:
+            print(f' ▶▶▶ login_member 오류 발생 : {str(ex)}')
+
+
+
+
+
+
