@@ -1,6 +1,7 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from starlette.middleware.sessions import SessionMiddleware
 from starlette.requests import Request
 from starlette.responses import HTMLResponse
 from starlette.staticfiles import StaticFiles
@@ -16,6 +17,10 @@ async def lifespan(app: FastAPI):
     await db_shutdown()
 
 app = FastAPI(lifespan=lifespan)
+
+# 세션처리를 위해 미들웨어 설정
+# pip install itsdangerous 설치
+app.add_middleware(SessionMiddleware, secret_key='20240822110005')
 
 templates = Jinja2Templates(directory="views/templates") # jinja2 설정
 app.mount('/static', StaticFiles(directory='views/static'), name='static')
