@@ -60,12 +60,15 @@ async def logout(req: Request):
     return RedirectResponse('/', status_code=303)
 
 @member_router.get('/myinfo', response_class=HTMLResponse)
-async def myinfo(req: Request):
+async def myinfo(req: Request, db: Session = Depends(get_db)):
     try:
         if 'logined_uid' not in req.session:  # 로그인하지 않았다면
             return RedirectResponse(url='/member/login', status_code=303)
 
-        return templates.TemplateResponse('/member/myinfo.html', {'request': req})
+        # 로그인 했다면 아이디로 회원정보 조회 후 myinfo에 출력
+        myinfo = MemberService.selectone_member(db, req.session['logined_uid'])
+        print('-->', myinfo)
+        return templates.TemplateResponse('/member/myinfo.html', {'request': req, 'myinfo': myinfo})
 
     except Exception as ex:
         print(f'▷▷▷ myinfo 오류 발생 : {str(ex)}')
