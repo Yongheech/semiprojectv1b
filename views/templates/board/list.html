@@ -50,44 +50,16 @@
             <th>작성일<th>조회</th></tr>
         </thead>
         <tbody>
-        <tr><td>1</td><td><a href="/board/view?bid=1">시간은 금이라구, 친구!</a></td>
-            <td>siestageek</td><td>2024.7.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!시간은 금이라구, 친구!시간은 금이라구, 친구!시간은 금이라구, 친구!시간은 금이라구, 친구!시간은 금이라구, 친구!시간은 금이라구, 친구!시간은 금이라구, 친구!시간은 금이라구, 친구!시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
+            {% for bd in bdlist %}
+            <tr>
+                <td>{{ bd.bno }}</td>
+                <td><a href="/board/view/{{ bd.bno }}">{{ bd.title }}</a></td>
+                <td>{{ bd.userid }}</td>
+                <td>{{ bd.regdate.strftime('%y-%m-%d') }}</td>
+                <td>{{ bd.views }}</td>
+            </tr>
+            {% endfor %}
+
         </tbody>
     </table>
     <div class="pagnation">
