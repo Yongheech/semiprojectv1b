@@ -18,7 +18,7 @@
     select, input{ padding: 5px}
     button{ padding: 3.5px 5px}
 
-    .pagnation {width: 600px;margin: 0 auto}
+    .pagnation {width: 700px;margin: 0 auto}
     div > ul {list-style: none; padding:0; }
     div > ul li {display: inline ;padding: 0 15px}
     .cpg {color:red; font-size: 30px; font-weight: bold}
@@ -69,7 +69,7 @@
             {% else %}
             <li>이전</li>
             {% endif %}
-            {% for idx in range(1, 10+1) %}
+            {% for idx in range(stpgb, stpgb+10) %}
                 {% if cpg != idx %}
                 <li><a href="/board/list/{{ idx }}">{{ idx }}</a></li>
                 {% else %}

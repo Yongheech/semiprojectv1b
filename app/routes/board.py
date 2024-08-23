@@ -17,13 +17,26 @@ templates = Jinja2Templates(directory='views/templates')
 # ...
 # npage : (n - 1) * 25 + 1 ~ (n - 1) * 25 + 25
 
+# 페이지네이션 알고리즘
+# 현재페이지에 따라 보여줄 페이지 블록 결정
+# ex) 총 페이지수 : 27일때
+# => select count(bno) 총게시글수, ceil(count(bno)/25) 총페이지수 from board;
+# cpg = 1: 1 2 3 4 5 6 7 8 9 10
+# cpg = 3: 1 2 3 4 5 6 7 8 9 10
+# cpg = 9: 1 2 3 4 5 6 7 8 9 10
+# cpg = 11: 11 12 13 14 15 16 17 18 19 20
+# cpg = 17: 11 12 13 14 15 16 17 18 19 20
+# cpg = 23: 21 22 23 24 25 26 27
+# stpg = (cpg - 1) / 10) * 10 +1
+
+
 @board_router.get('/list/{cpg}',response_class=HTMLResponse)
 async def list(req: Request, cpg: int, db: Session =Depends(get_db)):
     try:
+        stpgb = int((cpg - 1) / 10) * 10 +1
         bdlist = BoardService.select_board(db, cpg)
-
         return templates.TemplateResponse('/board/list.html',
-                      {'request':req, 'bdlist':bdlist, 'cpg': cpg })
+                      {'request':req, 'bdlist':bdlist, 'cpg': cpg, 'stpgb':stpgb })
 
     except Exception as ex:
         print(f'▷▷▷ list 오류 발생 : {str(ex)}')
