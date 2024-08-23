@@ -8,7 +8,7 @@ class BoardService:
     @staticmethod
     def select_board(db, cpg):
         try:
-            stbno = (cpg - 1) * 25 + 1
+            stbno = (cpg - 1) * 25
             stmt = select(Board.bno,Board.title,Board.userid,
                           Board.regdate,Board.views)\
                     .order_by(Board.bno.desc())\
