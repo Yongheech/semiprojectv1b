@@ -51,7 +51,7 @@
     <div class="row" style="width: 888px; margin: 0 auto;">
         {% for ga in galist %}
         <div class="col-10 card m-1" style="width: 18rem">
-            <a href="/gallery/view/1">
+            <a href="/gallery/view/{{ ga.gno }}">
                 <img src="http://127.0.0.1/cdn/img/{{ ga.fname }}"
                      class="card-img-top" alt="..."></a><!-- 이미지 -->
             <div class="card-body">
