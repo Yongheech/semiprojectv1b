@@ -15,7 +15,7 @@ gallery_router= APIRouter()
 templates = Jinja2Templates(directory='views/templates')
 
 @gallery_router.get('/list/{cpg}',response_class=HTMLResponse)
-async def glist(req: Request,cpg: int, db: Session =Depends(get_db)):
+async def list(req: Request,cpg: int, db: Session =Depends(get_db)):
     try:
         galist = GalleryService.select_gallery(cpg, db)
 
@@ -48,15 +48,10 @@ async def writeok(req: Request, gallery: NewGallery = Depends(get_gallery_data),
 async def view(req: Request, gno: int, db: Session = Depends(get_db)):
 
     try:
-        rows = GalleryService.selectone_gallery(gno, db)
-
-        gallery_dict = defaultdict(list)
-        for row in rows:
-            gallery, gal_attach = row
-            gallery_dict[gallery].append(gal_attach)
+        gallery = GalleryService.selectone_gallery(gno, db)
 
         return templates.TemplateResponse('/gallery/view.html',
-                    {'request': req, 'galleries': gallery_dict.items()} )
+                    {'request': req, 'gallery': gallery})
 
     except Exception as ex:
         print(f'▷▷▷ view 오류발생 {str(ex)}')
