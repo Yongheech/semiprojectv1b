@@ -11,9 +11,10 @@ from app.schema.gallery import NewGallery
 
 UPLOAD_PATH = 'C:/Java/nginx-1.26.2/html/cdn/img/'
 
-def get_gallery_data(title: str = Form(...),
-                userid: str = Form(...),  contents: str = Form(...)):
-    return NewGallery(userid=userid, title=title, contents=contents)
+def get_gallery_data(title: str = Form(...), userid: str = Form(...),
+                     contents: str = Form(...),captcha: str = Form(...)):
+    return NewGallery(userid=userid, title=title,
+                      contents=contents ,captcha=captcha)
 
 async def process_upload(files):
     attachs = [] # 업로드된 파일정보를 저장하기 위해 리스트 생성
