@@ -75,14 +75,13 @@ class GalleryService:
     @staticmethod
     def selectone_gallery(gno, db):
         try:
-            stmt = select(Gallery).where(Gallery.gno == gno)
-            result1 = db.execute(stmt).first()
+            stmt = (select(Gallery, GalAttach)
+                    .join_from(Gallery, GalAttach)\
+                    .where(Gallery.gno == gno))
+            result = db.execute(stmt).fetchall()
 
-            ga = aliased(GalAttach)  # 테이블에 대한 별칭
-            stmt = select(GalAttach.fname, GalAttach.fsize).where(GalAttach.gno == gno)
-            result2 = db.execute(stmt).fetchall()
 
-            return result1, result2
+            return result
 
         except SQLAlchemyError as ex:
             print(f' ▶▶▶ selectone_gallery에서 오류발생 : {str(ex)}')
