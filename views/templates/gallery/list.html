@@ -46,50 +46,27 @@
             <input type="text" name="search" id="search">
             <button type="button" id="findbtn">검색하기</button></td>
             <td colspan="2"><button type="button" id="writebtn" onclick="location.href='/gallery/write'">글쓰기</button></td></tr>
-        <tr><th>번호</th><th>제목</th><th>작성자</th>
-            <th>작성일<th>조회</th></tr>
         </thead>
-        <tbody>
-        <tr><td>1</td><td><a href="/gallery/view?bid=1">시간은 금이라구, 친구!</a></td>
-            <td>siestageek</td><td>2024.7.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!시간은 금이라구, 친구!시간은 금이라구, 친구!시간은 금이라구, 친구!시간은 금이라구, 친구!시간은 금이라구, 친구!시간은 금이라구, 친구!시간은 금이라구, 친구!시간은 금이라구, 친구!시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        <tr><td>1</td><td>시간은 금이라구, 친구!</td>
-            <td>siestageek</td><td>2024.07.30</td><td>123</td></tr>
-        </tbody>
     </table>
+    <div class="row" style="width: 888px; margin: 0 auto;">
+        {% for ga in galist %}
+        <div class="col-10 card m-1" style="width: 18rem">
+            <a href="/gallery/view/1">
+                <img src="http://127.0.0.1/cdn/img/{{ ga.fname }}"
+                     class="card-img-top" alt="..."></a><!-- 이미지 -->
+            <div class="card-body">
+                <h5 class="card-title">{{ ga.tatle }}</h5>
+                <div><span>{{ ga.userid }}</span>
+                    <span>{{ ga.regdate }}</span></div>
+                <div>
+                    <span><i class="bi bi-eye"></i> {{ ga.views }} </span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
     <div class="pagnation">
         <ul><li>이전</li><li>1</li><li>2</li><li>3</li><li>4</li>
             <li class="cpg">5</li><li>6</li><li>7</li><li>8</li><li>9</li>
@@ -100,4 +77,4 @@
             <hr>
             <p>copyright &copy; 2024.alpaca.all rights reserved. </p>
         </footer>
-{%endblock%}
+{% endblock %}

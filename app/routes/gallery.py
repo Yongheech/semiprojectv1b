@@ -14,9 +14,12 @@ gallery_router= APIRouter()
 templates = Jinja2Templates(directory='views/templates')
 
 @gallery_router.get('/list/{cpg}',response_class=HTMLResponse)
-async def list(req: Request, db: Session =Depends(get_db)):
+async def list(req: Request,cpg: int, db: Session =Depends(get_db)):
     try:
-        return templates.TemplateResponse('/gallery/list.html',{'request':req})
+        galist = GalleryService.select_gallery(cpg, db)
+
+        return templates.TemplateResponse('/gallery/list.html',
+                                          {'request':req, 'galist': galist})
 
     except Exception as ex:
         print(f'▷▷▷ list 오류 발생 : {str(ex)}')
