@@ -54,22 +54,24 @@
 
 
         // 빈값으로 넘어 올경우 리턴
-        if (grecaptcha.getResponse() === '')
+        if (grecaptcha.getResponse() === ''){
         // 실패시 에러 메시지
             alert('자동가입 방지를 클릭하세요!')
             return;
-
+        }
 
         const formData = new FormData(galleryfrm);
         // multipart 형식으로 전송해야 하기 때문에
         // formData.append(키, 값) 형태로 추가
         formData.append('captcha',grecaptcha.getResponse());
 
-        await fetch('/gallery/write',{
+        await fetch('/gallery/write', {
             method: 'POST',
-            body: formData
-        });
-    })
+            body: formData,
+            redirect: 'follow'
+           }).then((res)=> {
+               if (res.redirected) location.href =res.url
+           });
+      });
 </script>
-
 {% endblock %}
