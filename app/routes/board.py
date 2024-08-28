@@ -47,12 +47,12 @@ async def find(req: Request, ftype: str, fkey: str,
                cpg: int, db: Session =Depends(get_db)):
     try:
         stpgb = int((cpg - 1) / 10) * 10 +1
-        bdlist = BoardService.find_select_board(db, ftype, fkey, cpg)
+        bdlist = BoardService.find_select_board(db, ftype, '%'+fkey+'%', cpg)
         return templates.TemplateResponse('/board/list.html',
                                           {'request':req, 'bdlist':bdlist, 'cpg': cpg, 'stpgb':stpgb })
 
     except Exception as ex:
-        print(f'▷▷▷ list 오류 발생 : {str(ex)}')
+        print(f'▷▷▷ find 오류 발생 : {str(ex)}')
         return RedirectResponse(url='/member/error', status_code=303)
 
 
