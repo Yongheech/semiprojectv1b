@@ -7,6 +7,8 @@ from starlette.responses import HTMLResponse, RedirectResponse, StreamingRespons
 from starlette.templating import Jinja2Templates
 
 from app.dbfactory import get_db
+from app.service.pds import PdsService
+
 # from app.service.pds import pdsService
 
 pds_router = APIRouter()
@@ -25,10 +27,10 @@ async def list(req: Request):
     return templates.TemplateResponse('/pds/list.html', {'request':req})
 
 @pds_router.get('/pdsdown/{pno}',response_class=HTMLResponse)
-async def pdsdown(db: Session = Depends(get_db)):
+async def pdsdown(pno: int, db: Session = Depends(get_db)):
 
     DOWNLOAD_PATH = 'c:/Java/pdsupload/'
-    down_fname = 'BreadBarberEndingTitle.mp3'
+    down_fname = PdsService.selectone_file(db,pno)
     file_path = os.path.join(DOWNLOAD_PATH, down_fname)
 
     # 파일 다운로드시 작은 조각(chunk)으로 나눠 클라이언트에게 전송
@@ -41,10 +43,10 @@ async def pdsdown(db: Session = Depends(get_db)):
                              headers={'Content-Disposition': f'attachment; filename={down_fname}'})
 
 @pds_router.get('/mp3play/{pno}',response_class=HTMLResponse)
-async def mp3play(req: Request):
+async def mp3play(pno: int, db:Session = Depends(get_db)):
 
     MUSIC_PATH = 'c:/Java/pdsupload/'
-    audio_fname = 'BreadBarberEndingTitle.mp3'
+    audio_fname = PdsService.selectone_file(db, pno)
     file_path = os.path.join(MUSIC_PATH, audio_fname)
 
     # 파일 다운로드시 작은 조각(chunk)으로 나눠 클라이언트에게 전송
