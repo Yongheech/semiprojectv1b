@@ -45,7 +45,11 @@
         </select>
             <input type="text" name="search" id="search">
             <button type="button" id="findbtn">검색하기</button></td>
-            <td colspan="2"><button type="button" id="writebtn" onclick="location.href='/board/write'">글쓰기</button></td></tr>
+            <td colspan="2">
+                {% if 'logined_uid' in request.session %}
+                <button type="button" id="writebtn" >글쓰기</button>
+                {% endif %}
+            </td></tr>
         <tr><th>번호</th><th>제목</th><th>작성자</th>
             <th>작성일<th>조회</th></tr>
         </thead>
@@ -79,4 +83,16 @@
             <li><a href="/board/list/{{ cpg + 1 }}">{{ idx }}다음</a></li></ul>
     </div>
 </main>
-{%endblock%}
+{% endblock %}
+
+{% block script %}
+
+<script>
+    let writebtn = document.querySelector('#writebtn');
+
+    writebtn.addEventListener('click', ()=> {
+        location.href = '/board/write';
+    });
+</script>
+
+{% endblock %}
