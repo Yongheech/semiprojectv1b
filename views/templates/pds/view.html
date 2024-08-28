@@ -1,0 +1,38 @@
+{% extends 'include/base.html' %}
+
+{% block title %}
+세미 프로젝트 - 자료실 본문보기
+{% endblock %}
+
+{% block style %}
+<style>
+    table { width: 650px; margin: 0 auto;  }
+    tr { height: 40px }
+    th { width: 100px }
+    tr:nth-child(4) { vertical-align: top }
+    #listbtn { margin-left: 100px }
+</style>
+{% endblock %}
+
+{% block main %}
+<main>
+    <h2>자료실 본문보기</h2>
+    <table>
+        <tr><th>제 목</th><td>시간은 금이라구, 친구!</td></tr>
+        <tr><th>작성자</th><td>siegeek</td></tr>
+        <tr><th>작성일</th><td>2024-05-05 12:45:05</td></tr>
+        <tr><th>본 문</th><td>시간은 금이라구, 친구!시간은 금이라구,시간은 금이라구, 친구!시간은 금이라구,시간은 금이라구, 친구!시간은 금이라구,
+            시간은 금이라구, 친구!시간은 금이라구,시간은 금이라구, 친구!시간은 금이라구,시간은 금이라구, 친구!시간은 금이라구,시간은 금이
+            시간은 금이라구, 친구!시간은 금이라구,시간은 금이라구, 친구!시간은 금이라구,시간은 금이라구, 친구!시간은 금이라구,</td></tr>
+        <tr><th>첨부파일1</th><td> </td></tr>
+        <tr><th>첨부파일2</th><td> </td></tr>
+        <tr><th>첨부파일3</th><td> </td></tr>
+        <tr><th>첨부파일4</th><td> </td></tr>
+        <tr><td colspan="2">
+            <button type="button" id="listbtn" onclick="location.href='/pds/list/1'">리스트로</button>
+            <button type="button" id="mdfybtn" onclick="location.href='/pds/modify'">수정하기</button>
+            <button type="button" id="rmvbtn">삭제하기</button>
+        </td></tr>
+    </table>
+</main>
+{% endblock %}

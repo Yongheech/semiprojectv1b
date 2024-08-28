@@ -1,0 +1,33 @@
+{% extends 'include/base.html' %}
+
+{% block title %}
+세미 프로젝트 - 자료실 글쓰기
+{% endblock %}
+
+{% block style %}
+<style>
+    form { width: 450px; margin:50px auto }
+    th { width: 150px; }
+    tr {height: 40px }
+    tr:nth-child(3) {vertical-align: top; }
+    #listbtn { margin-left: 95px }
+    input, textarea, button { padding: 5px }
+</style>
+{% endblock %}
+
+{% block main %}
+<main>
+    <h2>자료실 글쓰기</h2>
+    <form name="pdsfrm" enctype="multipart/form-data">
+        <table>
+            <tr><th>제 목</th><td><input type="text" name="title" id="title" required></td></tr>
+            <tr><th>작성자</th><td><input type="text" name="userid" id="userid" value="zzyzzy" readonly></td></tr>
+            <tr><th>본 문</th><td><textarea name="contents" id="contents" rows="10" cols="45" required></textarea> </td></tr>
+            <tr><td colspan="2">
+                <button type="button" id="listbtn" onclick="location.href='/pds/list/1'">리스트로</button>
+                <button type="submit" id="wirteokbtn">입력완료</button>
+            </td></tr>
+        </table>
+    </form>
+</main>
+{% endblock %}
