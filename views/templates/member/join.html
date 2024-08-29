@@ -9,14 +9,14 @@
             async defer></script>
     <script type="text/javascript">
         var onloadCallback = () => {
-            grecaptcha.render('captcha', { 'sitekey' : '' });
+            grecaptcha.render('captcha', { 'sitekey' : '6LeKoCsqAAAAAHBUAE7T3VyLPC9sYrosoYDgJRRD' });
         };
     </script>
 {% endblock %}
 
 {% block main%}
     <main>
-        <h2>회원가입</h2>
+        <h2><i class="bi bi-people-fill"></i>회원가입</h2>
         <div class="d-flex justify-content-center align-items-center" style="height: 65vh">
         <form name="joinfrm" method="post" class="col-5">
             <div class="row my-2"><label for="userid" class="col-form-label col-4 text-end">아이디</label>
@@ -43,8 +43,8 @@
 
                <div  class="row my-2"><label class="col-4 text-end" ></label>
                    <div class="col-7">
-                   <button type="button" id="joinbtn" class="btn btn-primary">입력완료</button>
-                   <button type="reset" id="rstbtn" class="btn btn-danger">다시입력</button></div></div>
+                   <button type="button" id="joinbtn" class="btn btn-primary"><i class="bi bi-check"></i>입력완료</button>
+                   <button type="reset" id="rstbtn" class="btn btn-danger"><i class="bi bi-x"></i>다시입력</button></div></div>
         </form>
         </div>
 </main>
