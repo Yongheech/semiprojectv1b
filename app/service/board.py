@@ -1,4 +1,4 @@
-from sqlalchemy import select, or_, update
+from sqlalchemy import select, or_, update, insert, func
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import joinedload, contains_eager
 
@@ -20,7 +20,6 @@ class BoardService:
 
         except SQLAlchemyError as ex:
             print(f'▶▶▶select_board 오류발생: {str(ex)}')
-
 
 
 
@@ -78,3 +77,24 @@ class BoardService:
         except SQLAlchemyError as ex:
             print(f'▶▶▶selectone_board 오류발생: {str(ex)}')
             db.rollbac()
+
+
+
+    @staticmethod
+    def insert_reply(db, rp):
+        try:
+            # 댓글 추가시 생성될 댓글번호 예측
+            # select coalesce(max(rno), 0)  + 1 from reply;
+            stmt = select(func.coalesce(func.max(Reply.rno), 0) + 1)
+            next_rno = db.execute(stmt).scalar_one()
+
+            stmt = insert(Reply).values(userid=rp.userid,
+                        reply=rp.reply, bno=rp.bno, rpno=next_rno)
+            result = db.execute(stmt)
+
+            db.commit()
+            return result
+
+        except SQLAlchemyError as ex:
+            print(f'▶▶▶insert_reply 오류발생: {str(ex)}')
+            db.rollback()

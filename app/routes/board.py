@@ -91,8 +91,8 @@ async def view(req: Request, bno:int, db: Session = Depends(get_db)):
 @board_router.post('/reply',response_class=HTMLResponse)
 async def reply(req: Request, reply: NewReply, db: Session = Depends(get_db)):
     try:
-        print('==>', reply)
-        return RedirectResponse('/board/list/1', 303)
+        if BoardService.insert_reply(db, reply):
+            return RedirectResponse(f'/board/view/{reply.bno}', 303)
 
 
     except Exception as ex:
