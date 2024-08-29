@@ -11,6 +11,13 @@
     th {width: 100px}
     tr:nth-child(4) {vertical-align: top}
     #listbtn {margin-left: 100px}
+
+    h3 { margin-top: 45px; }
+    #comtlist { margin-top: 25px; width: 700px }
+    .cmtbg { background: yellow; padding: 7px 0 }
+    .rpybg { background: lime; padding: 7px 0 }
+    .pushend { float: right }
+    .pushbtm { margin-top: 50px }
 </style>
 {% endblock %}
 
@@ -42,5 +49,42 @@
                 <button type="button" id="rmvbtn" >삭제하기</button>
             </td></tr>
     </table>
+
+    <!-- 댓글 시작 -->
+    <h3 class="offset-2 "><i class="bi bi-chat-dots-fill"></i> 나도 한마디</h3>
+
+    <table class="offset-3" id="comtlist">
+        <tr><td><h4>abc123</h4></td>
+            <td><div class="cmtbg">2024.12.01
+                <span class="pushend"><a href="#">[추가]</a></span></div>
+                <p>댓글댓글댓글댓글</p></td></tr>
+
+        <tr><td></td><td><div class="rpybg">
+                <span>987xyz</span>
+                <span class="pushend">2024.11.01</span></div>
+                <p>대댓글대댓글대댓글대댓글</p></td></tr>
+
+        <tr><td><h4>987xyz</h4></td>
+            <td><div class="cmtbg">2024.12.01
+                <span class="pushend"><a href="#">[추가]</a></span></div>
+                <p>댓글댓글댓글댓글</p></td></tr>
+
+        <tr><td><h4>zzyzzy</h4></td>
+            <td><div class="cmtbg">2024.12.01
+                <span class="pushend"><a href="#">[추가]</a></span></div>
+                <p>댓글댓글댓글댓글</p></td></tr>
+    </table><!-- 댓글목록 -->
+
+    <div class="row offset-2 col-8 pushbtm">
+        <form name="replyfrm" id="replyfrm" class="card card-body bg-light">
+            <div class="form-group row">
+                <div class="col-auto"><label class="ms-3 pushbtm" for="reply">작성자</label></div>
+                <div class="col-8"><textarea class="form-control" name="reply" id="reply" rows="5"></textarea></div>
+                <div class="col-auto"><button class="btn btn-dark pushbtm" type="button" id="newbrbtn">
+                    <i class="bi bi-chat-dots"></i> 댓글쓰기</button></div>
+            </div>
+        </form>
+    </div><!-- 댓글쓰기 -->
+
 </main>
 {%endblock%}
