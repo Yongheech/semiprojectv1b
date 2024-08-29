@@ -1,8 +1,8 @@
 from sqlalchemy import select, or_, update
 from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy.orm import joinedload
+from sqlalchemy.orm import joinedload, contains_eager
 
-from app.model.board import Board
+from app.model.board import Board, Reply
 
 
 class BoardService:
@@ -64,13 +64,16 @@ class BoardService:
             result = db.execute(stmt)
 
             # 본문글 + 댓글 읽어오기
-            stmt = select(Board).options(joinedload(Board.replys))\
-                 .where(Board.bno == bno)
+            # outerjoin : outer join
+            # contains_eager : 관계 맺은 하위 객체의 내용을 즉시 로딩
+            stmt = select(Board).outerjoin(Board.replys)\
+                 .options(contains_eager(Board.replys))\
+                 .where(Board.bno == bno).order_by(Reply.rpno)
 
-            result = db.execute(stmt).scalars().first()
-
+            result = db.execute(stmt)
             db.commit()
-            return result
+
+            return result.scalars().first()
 
         except SQLAlchemyError as ex:
             print(f'▶▶▶selectone_board 오류발생: {str(ex)}')
