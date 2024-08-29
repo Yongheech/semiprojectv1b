@@ -59,12 +59,43 @@
         <form name="replyfrm" id="replyfrm" class="card card-body bg-light">
             <div class="form-group row">
                 <div class="col-auto"><label class="ms-3 pushbtm" for="reply">작성자</label></div>
-                <div class="col-8"><textarea class="form-control" name="reply" id="reply" rows="5"></textarea></div>
-                <div class="col-auto"><button class="btn btn-dark pushbtm" type="button" id="newbrbtn">
+                <div class="col-8"><textarea class="form-control" name="reply" id="reply" rows="5" required></textarea></div>
+                <div class="col-auto"><button class="btn btn-dark pushbtm" type="submit" id="newbrbtn">
                     <i class="bi bi-chat-dots"></i> 댓글쓰기</button></div>
             </div>
         </form>
     </div><!-- 댓글쓰기 -->
 
 </main>
-{%endblock%}
+{% endblock %}
+
+{% block script %}
+<script>
+    let replyfrm = document.replyfrm;
+
+    replyfrm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(replyfrm);
+
+        let jsondata = {};
+        formData.forEach((val, key) => {
+            jsondata[key] = val;
+        });
+
+        fetch('/board/reply', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsondata),
+
+            redirect: 'follow'
+        }).then((res) => {
+            if (res.redirected) location.href = res.url;
+        }); // fetch
+    });
+</script>
+
+{% endblock %}
