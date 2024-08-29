@@ -74,5 +74,14 @@ async def write(req: Request):
     return templates.TemplateResponse('/board/write.html', {'request':req})
 
 @board_router.get('/view/{bno}',response_class=HTMLResponse)
-async def view(req: Request):
-    return templates.TemplateResponse('/board/view.html', {'request':req})
+async def view(req: Request, bno:int, db: Session = Depends(get_db)):
+
+    try:
+
+        boards = BoardService.selectone_board(bno, db)
+        return templates.TemplateResponse('/board/view.html',
+                                      {'request':req, 'boards':boards})
+
+    except Exception as ex:
+        print(f'▷▷▷ view 오류 발생 : {str(ex)}')
+        return RedirectResponse(url='/member/error', status_code=303)

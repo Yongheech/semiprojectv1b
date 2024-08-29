@@ -20,6 +20,10 @@ class BoardService:
         except SQLAlchemyError as ex:
             print(f'▶▶▶select_board 오류발생: {str(ex)}')
 
+
+
+
+
     @staticmethod
     def find_select_board(db, ftype, fkey, cpg ):
         try:
@@ -47,3 +51,14 @@ class BoardService:
 
         except SQLAlchemyError as ex:
             print(f'▶▶▶ find_select_board 오류발생: {str(ex)}')
+
+    @staticmethod
+    def selectone_board(bno, db):
+        try:
+            stmt = select(Board).where(Board.bno == bno)
+            result = db.execute(stmt)
+
+            return result
+
+        except SQLAlchemyError as ex:
+            print(f'▶▶▶selectone_board 오류발생: {str(ex)}')
