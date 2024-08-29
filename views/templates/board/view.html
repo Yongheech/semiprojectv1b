@@ -41,15 +41,17 @@
 
     <table class="offset-3" id="comtlist">
         {% for rp in boards.replys %}
+        {% if rp.rno == rp.rpno %}
         <tr><td><h4>{{ rp.userid }}</h4></td>
             <td><div class="cmtbg">{{ rp.regdate }}
                 <span class="pushend"><a href="#">[추가]</a></span></div>
                 <p>{{ rp.reply }}</p></td></tr>
-
-<!--        <tr><td></td><td><div class="rpybg">-->
-<!--                <span>987xyz</span>-->
-<!--                <span class="pushend">2024.11.01</span></div>-->
-<!--                <p>대댓글대댓글대댓글대댓글</p></td></tr>-->
+        {%  else %}
+        <tr><td></td><td><div class="rpybg">
+                <span>{{ rp.userid }}</span>
+                <span class="pushend">{{ rp.regdate }}</span></div>
+                <p>{{ rp.reply }}</p></td></tr>
+        {% endif %}
         {% endfor %}
     </table><!-- 댓글목록 -->
 
