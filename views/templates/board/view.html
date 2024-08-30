@@ -45,7 +45,10 @@
         <tr><td><h4>{{ rp.userid }}</h4></td>
             <td><div class="cmtbg">{{ rp.regdate }}
                 <span class="pushend">
-                    <a href="javascript:addReply('{{rp.rno}}')">[추가]</a></span></div>
+                     {% if 'logined_uid' in request.session %}
+                    <a href="javascript:addReply('{{rp.rno}}')">[추가]</a>
+                     {% endif %}
+                </span></div>
                 <p>{{ rp.reply }}</p></td></tr>
         {%  else %}
         <tr><td></td><td><div class="rpybg">
@@ -59,12 +62,22 @@
     <div class="row offset-2 col-8 pushbtm">
         <form name="replyfrm" id="replyfrm" class="card card-body bg-light">
             <div class="form-group row">
+                {% if 'logined_uid' in request.session %}
+                <div class="col-auto"><label class="ms-3 pushbtm" for="reply">{{request.session.logined_uid}}</label></div>
+                {% else %}
                 <div class="col-auto"><label class="ms-3 pushbtm" for="reply">작성자</label></div>
+                {% endif %}
                 <div class="col-8"><textarea class="form-control" name="reply" id="reply" rows="5" required></textarea></div>
-                <div class="col-auto"><button class="btn btn-dark pushbtm" type="submit" id="newbrbtn">
+                <div class="col-auto">
+                    {% if 'logined_uid' in request.session %}
+                    <button class="btn btn-dark pushbtm" type="submit" id="newbrbtn">
+                    {% else %}
+                    <button class="btn btn-dark pushbtm" type="button" disabled id="newbrbtn">
+                    {% endif %}
+
                     <i class="bi bi-chat-dots"></i> 댓글쓰기</button></div>
             </div>
-            <input type="hidden" name="userid" value="abc123">
+            <input type="hidden" name="userid" value="{{ request.session.logined_uid }}">
             <input type="hidden" name="bno" value="{{ boards.bno }}">
 
         </form>
@@ -86,7 +99,7 @@
                                 class="btn btn-warning">대댓글 작성</button>
                     </div>
                 </div>
-                <input type="hidden" name="userid" value ="987xyz">
+                <input type="hidden" name="userid" value ="{{ request.session.logined_uid }}">
                 <input type="hidden" name="bno" value ="{{ boards.bno }}">
                 <input type="hidden" name="rpno" id="rpno" value="">
             </form>
