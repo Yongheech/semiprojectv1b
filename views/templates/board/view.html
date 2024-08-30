@@ -66,6 +66,7 @@
             </div>
             <input type="hidden" name="userid" value="abc123">
             <input type="hidden" name="bno" value="{{ boards.bno }}">
+
         </form>
     </div><!-- 댓글쓰기 -->
 
@@ -85,6 +86,9 @@
                                 class="btn btn-warning">대댓글 작성</button>
                     </div>
                 </div>
+                <input type="hidden" name="userid" value ="987xyz">
+                <input type="hidden" name="bno" value ="{{ boards.bno }}">
+                <input type="hidden" name="rpno" id="rpno" value="">
             </form>
         </div>
     </div>
@@ -96,12 +100,12 @@
 {% block script %}
 <script>
     let replyfrm = document.replyfrm;
+    let rpfrm = document.rpfrm;
 
     replyfrm?.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const formData = new FormData(replyfrm);
-
         let jsondata = {};
         formData.forEach((val, key) => {
             jsondata[key] = val;
@@ -114,20 +118,43 @@
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(jsondata),
-
             redirect: 'follow'
         }).then((res) => {
             if (res.redirected) location.href = res.url;
         }); // fetch
     });
 
-
     let addReply = (rno) => {
         let rpno = document.querySelector('#rpno');
-        let replyModel = document.querySelector('#replyModal');
-        let myModel = new bootstrap.Modal(replyModel);
-        myModel.show();
+        let replyModal = document.querySelector('#replyModal');
+
+        let myModal = new bootstrap.Modal(replyModal);
+        myModal.show();
+        rpno.value = rno;  // 작성할 대댓글의 부모 댓글번호 지정
     };
+
+    rpfrm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(rpfrm);
+        let jsondata = {};
+        formData.forEach((val, key) => {
+            jsondata[key] = val;
+        });
+
+        fetch('/board/rreply', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsondata),
+            redirect: 'follow'
+        }).then((res) => {
+            if (res.redirected) location.href = res.url;
+        }); // fetch
+    });
+
 </script>
 
 {% endblock %}
