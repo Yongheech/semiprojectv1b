@@ -44,7 +44,8 @@
         {% if rp.rno == rp.rpno %}
         <tr><td><h4>{{ rp.userid }}</h4></td>
             <td><div class="cmtbg">{{ rp.regdate }}
-                <span class="pushend"><a href="#">[추가]</a></span></div>
+                <span class="pushend">
+                    <a href="javascript:addReply('{{rp.rno}}')">[추가]</a></span></div>
                 <p>{{ rp.reply }}</p></td></tr>
         {%  else %}
         <tr><td></td><td><div class="rpybg">
@@ -67,6 +68,27 @@
             <input type="hidden" name="bno" value="{{ boards.bno }}">
         </form>
     </div><!-- 댓글쓰기 -->
+
+    <!-- 대댓글 작성을 위한 모달대화상자 -->
+    <div class="modal hide"  id="replyModal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <form name="rpfrm" id="rpfrm" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><i class="bi bi-chat-text-fill"></i> 대댓글 쓰기</h4></div>
+                    <div class="modal-body">
+                    <textarea name="reply" id="rreply" rows="8" cols="60"
+                              class="form-control" required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="newrrpbtn"
+                                class="btn btn-warning">대댓글 작성</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 
 </main>
 {% endblock %}
@@ -98,6 +120,14 @@
             if (res.redirected) location.href = res.url;
         }); // fetch
     });
+
+
+    let addReply = (rno) => {
+        let rpno = document.querySelector('#rpno');
+        let replyModel = document.querySelector('#replyModal');
+        let myModel = new bootstrap.Modal(replyModel);
+        myModel.show();
+    };
 </script>
 
 {% endblock %}
