@@ -1,3 +1,5 @@
+from math import ceil
+
 from fastapi import APIRouter, Request, Depends
 from sqlalchemy.orm import Session
 from starlette.responses import HTMLResponse, RedirectResponse
@@ -43,9 +45,11 @@ templates = Jinja2Templates(directory='views/templates')
 async def list(req: Request, cpg: int, db: Session =Depends(get_db)):
     try:
         stpgb = int((cpg - 1) / 10) * 10 +1
-        bdlist = BoardService.select_board(db, cpg)
+        bdlist, cnt = BoardService.select_board(db, cpg)
+        allpage = ceil(cnt / 25) # 총 페이지수
         return templates.TemplateResponse('/board/list.html',
-                      {'request':req, 'bdlist':bdlist, 'cpg': cpg, 'stpgb':stpgb })
+                      {'request': req, 'bdlist':bdlist, 'cpg': cpg,
+                       'stpgb': stpgb, 'allpage': allpage})
 
     except Exception as ex:
         print(f'▷▷▷ list 오류 발생 : {str(ex)}')
