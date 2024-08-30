@@ -12,13 +12,17 @@ class BoardService:
     def select_board(db, cpg):
         try:
             stbno = (cpg - 1) * 25
+            # 총 게시글 수 조회
+            cnt = db.execute(func.count(Board.bno)).scalar()
+
+
             stmt = select(Board.bno,Board.title,Board.userid,
                           Board.regdate,Board.views)\
                     .order_by(Board.bno.desc())\
                      .offset(stbno).limit(25)
             result =db.execute(stmt)
 
-            return result
+            return result ,cnt
 
         except SQLAlchemyError as ex:
             print(f'▶▶▶select_board 오류발생: {str(ex)}')
