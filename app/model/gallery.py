@@ -12,7 +12,7 @@ class Gallery(Base):
 
     gno: Mapped[int] = mapped_column(primary_key=True, autoincrement=True, index=True)
     title: Mapped[str] = mapped_column(String(100), index=True)
-    userid: Mapped[str] = mapped_column(String(18), ForeignKey(String(250), 'member.userid'), index=True)
+    userid: Mapped[str] = mapped_column(String(18), ForeignKey( 'member.userid'), index=True)
     regdate: Mapped[datetime] = mapped_column(default=datetime.now)
     views: Mapped[int] = mapped_column(default=0)
     contents: Mapped[str] = mapped_column(Text)
