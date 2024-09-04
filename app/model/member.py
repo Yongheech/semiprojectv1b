@@ -8,6 +8,7 @@ from app.model.base import Base
 
 class Member(Base):
     __tablename__ = 'member'
+    __table_args__ = {'sqlite_autoincrement': True}
 
     mno: Mapped[int] = mapped_column(primary_key=True, autoincrement=True, index=True)
     userid: Mapped[str] = mapped_column(String(18), unique=True, nullable=False, index=True) # 식별관계

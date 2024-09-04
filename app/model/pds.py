@@ -9,6 +9,7 @@ from app.model.base import Base
 
 class Pds(Base):
     __tablename__ = 'pds'
+    __table_args__ = {'sqlite_autoincrement': True}
 
     pno: Mapped[int] = mapped_column(primary_key=True, autoincrement=True, index=True)
     title: Mapped[str] = mapped_column(String(100), index=True)
@@ -20,6 +21,7 @@ class Pds(Base):
 
 class PdsAttach(Base):
     __tablename__ = 'pdsattach'
+    __table_args__ = {'sqlite_autoincrement': True}
 
     pano: Mapped[int] = mapped_column(primary_key=True, autoincrement=True, index=True)
     pno: Mapped[int] = mapped_column(ForeignKey('pds.pno'), index=True)

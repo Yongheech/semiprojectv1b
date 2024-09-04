@@ -27,7 +27,7 @@ class MemberService:
     def check_captcha(member):
 
         req_url = 'https://www.google.com/recaptcha/api/siteverify'
-        params = {'secret': '',
+        params = {'secret': '6LeKoCsqAAAAAOGQbslqQCwHU6shGBsPfmajiVh5',
                    'response': member.captcha }
 
         res = requests.get(req_url, params=params)

@@ -8,6 +8,7 @@ from app.model.base import Base
 
 class Board(Base):
     __tablename__ = 'board'
+    __table_args__ = {'sqlite_autoincrement': True}
 
     bno: Mapped[int] = mapped_column(primary_key=True, autoincrement=True, index=True)
     title: Mapped[str] = mapped_column(String(100), index=True)
@@ -20,6 +21,7 @@ class Board(Base):
 
 class Reply(Base):
     __tablename__ = 'reply'
+    __table_args__ = {'sqlite_autoincrement': True}
 
     rno: Mapped[int] = mapped_column(primary_key=True, autoincrement=True, index=True)
     reply: Mapped[str] = mapped_column(String(250), index=True)
